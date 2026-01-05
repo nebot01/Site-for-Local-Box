@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local-Box Server</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Заголовок */
+        h1.server-title {
+            font-size: 3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .color-local {
+            color: rgb(214, 54, 43);
+        }
+
+        .color-box {
+            color: rgb(255, 255, 255);
+        }
+
+        /* Основной контейнер для разметки */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 10px;
+            align-items: flex-start;
+        }
+
+        /* Основная часть (слева) */
+        .content-frame {
+            flex: 3;
+            border: 4px solid #ff0000; /* Ярко-красная рамка */
+            background-color: #000000;
+            padding: 20px;
+            min-height: 400px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Боковая панель (справа) */
+        .sidebar-frame {
+            flex: 1;
+            border: 4px solid #ff0000;
+            background-color: #000000;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Кнопки навигации */
+        .nav-btn {
+            background-color: #222;
+            color: white;
+            border: 1px solid #ff0000;
+            padding: 10px 20px;
+            margin: 5px 0;
+            width: 100%;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #ff0000;
+            color: black;
+        }
+
+        .nav-btn.active {
+            background-color: rgb(214, 54, 43);
+            color: white;
+        }
+
+        /* Гифка и текст under construction */
+        .construction-area {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #aaa;
+        }
+        
+        .construction-area img {
+            max-width: 100%;
+            border: 1px solid #333;
+            margin-top: 5px;
+        }
+
+        /* Контент вкладок */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- НОВЫЙ СТИЛЬ РАДУЖНЫХ НИКОВ (ИЗ СКРИПТА) --- */
+        .rainbow-names {
+            font-weight: bold;
+            /* Градиент из скрипта загрузочного экрана */
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow_move 3s linear infinite;
+        }
+
+        @keyframes rainbow_move { 
+            to { background-position: 200% center; } 
+        }
+
+        /* Стили для биндов */
+        .bind-list {
+            list-style: none;
+            padding: 0;
+        }
+        .bind-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        .cmd {
+            color: rgb(214, 54, 43);
+            font-weight: bold;
+        }
+
+        /* Стили для Discord */
+        .discord-box {
+            border: 2px solid red;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .join-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+            transition: background-color 0.5s ease;
+            font-weight: bold;
+        }
+
+        .join-btn:hover {
+            background-color: #00ff00; /* Зеленый при наводке */
+            color: black;
+            border-color: #00ff00;
+        }
+
+        /* Стили для Servers */
+        .server-info a {
+            color: rgb(214, 54, 43);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Название сервера над рамкой -->
+    <h1 class="server-title">
+        <span class="color-local">Local</span><span class="color-box">-Box</span>
+    </h1>
+
+    <div class="main-container">
+        
+        <!-- Основная часть сайта (Info/Content) -->
+        <div class="content-frame">
+            
+            <!-- Вкладка INFO -->
+            <div id="info" class="tab-content active">
+                <h2 style="margin-top: 0; color: rgb(214, 54, 43);">Info</h2>
+                <p>
+                    This project made by <span class="rainbow-names">Ne bot01</span> and <span class="rainbow-names">Wagan</span> inspired by Zcity server by uzelezz sadsalat mr.point zac90 mannytko deka.
+                </p>
+                <br>
+                <p>
+                    This server use many funny and realistic systems like Faking(ragdolize), many weapons with detailed animations and another mechanics.
+                </p>
+                <br>
+                <br>
+                <p>
+                    Special Thanks: Vekad (For helping with tools), Rubby4 (I think), Rais (for motivation).
+            </div>
+
+            <!-- Вкладка BINDS -->
+            <div id="binds" class="tab-content">
+                <h2 style="margin-top: 0; color: rgb(214, 54, 43);">Useful Binds</h2>
+                <p>Open console (~) and type:</p>
+                <p><i>bind "key" "command"</i></p>
+                <ul class="bind-list">
+                    <li class="bind-item"><span class="cmd">"hg_change_posture 2"</span> - Bind to specific posture</li>
+                    <li class="bind-item"><span class="cmd">"hg_change_posture"</span> - Cycle through postures / see list in console</li>
+                    <li class="bind-item"><span class="cmd">"fake"</span> - Ragdolize your player</li>
+                    <li class="bind-item"><span class="cmd">"say *drop"</span> - Drop current weapon</li>
+                    <li class="bind-item"><span class="cmd">"+hmcd_holdbreath"</span> - Hold breath (Useful for aiming or poison/gas)</li>
+                    <li class="bind-item"><span class="cmd">"hmcd_togglelaser"</span> - Toggle laser attachment (Works on tasers too)</li>
+                    <li class="bind-item"><span class="cmd">"hg_kick2"</span> - Kick</li>
+                    <li class="bind-item"><span class="cmd">"suicide"</span> - Suicide</li>
+                    <li class="bind-item"><span class="cmd">"+alt1"</span> - Lean Left</li>
+                    <li class="bind-item"><span class="cmd">"+alt2"</span> - Lean Right</li>
+                    <li class="bind-item"><span class="cmd">"+altlook"</span> - Free look (Look around without turning body)</li>
+                </ul>
+            </div>
+
+            <!-- Вкладка SERVERS -->
+            <div id="servers" class="tab-content">
+                <h2 style="margin-top: 0; color: rgb(214, 54, 43);">Connection Info</h2>
+                <div class="server-info">
+                    <p>Our server need <a href="https://www.radmin-vpn.com/" target="_blank">Radmin VPN</a> software.</p>
+                    <hr style="border-color: #333;">
+                    <h3>Radmin VPN net:</h3>
+                    <p><strong>Name:</strong> Local-box</p>
+                    <p><strong>Password:</strong> Local-box</p>
+                    <p><strong>Server ip:</strong> 26.22.65.206</p>
+                </div>
+            </div>
+
+            <!-- Вкладка DISCORD -->
+            <div id="discord" class="tab-content">
+                <h2 style="margin-top: 0; color: rgb(214, 54, 43);">Discord</h2>
+                
+                <div class="discord-box">
+                    <h3>Local-Box Community Server</h3>
+                    <a href="https://discord.gg/h29UUhwPFZ" target="_blank" class="join-btn">Join</a>
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px;">Russian Local-Box Server</p>
+            </div>
+
+        </div>
+
+        <!-- Боковая рамка (Навигация) -->
+        <div class="sidebar-frame">
+            <button class="nav-btn active" onclick="openTab('info', this)">Info</button>
+            <button class="nav-btn" onclick="openTab('binds', this)">Binds</button>
+            <button class="nav-btn" onclick="openTab('servers', this)">Servers</button>
+            <button class="nav-btn" onclick="openTab('discord', this)">Discord</button>
+
+            <div class="construction-area">
+                <p>Site is under construction</p>
+                <img src="https://i.pinimg.com/originals/eb/1b/27/eb1b27863813653543914d222ceb9cd0.gif" alt="Construction GIF">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openTab(tabName, btnElement) {
+            // Скрыть все вкладки
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].className = contents[i].className.replace(" active", "");
+            }
+
+            // Убрать класс active у всех кнопок
+            var buttons = document.getElementsByClassName("nav-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].className = buttons[i].className.replace(" active", "");
+            }
+
+            // Показать текущую вкладку и подсветить кнопку
+            document.getElementById(tabName).className += " active";
+            if (btnElement) {
+                btnElement.className += " active";
+            }
+        }
+    </script>
+</body>
+</html>
